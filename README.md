@@ -20,9 +20,11 @@ SQL Server 2019+ (Database: SSIS_Telecom_DB)
 Visual Studio (SSDT) for package development
 
 📁 Structure
+
 Telecom_ETL_SSIS_Project/
 │── Packages/       # SSIS .dtsx packages
 │── SQL_Scripts/    # Database scripts
 │── Config/         # Connection settings
 └── README.md
+
 
