@@ -5,19 +5,41 @@ It extracts CSV files generated every 5 minutes, transforms them using business 
 
 🚀 Key Features
 
-File Handling – Loops through CSV files from source folders, moves processed files.
+The telecom system generates a CSV file every 5 minutes with customer transaction data.
+The SSIS package automates the following steps:
 
-Data Transformation – Validates columns (IMSI, IMEI, CELL, LAC, EVENT_TS) with derived columns, lookups, and conditional splits.
+1. File Iteration – Scans source folders using a Foreach Loop Container.
 
-Database Loading – Inserts valid rows into [dbo].[telecom_transaction], rejects invalid ones into [dbo].[error_transaction] and logs sources in [dbo].[error_source_output].
+2 .Extraction – Reads CSV data through Flat File Sources.
 
-🧰 Tech Stack
+3. Transformation – Applies rules with Derived Columns, Lookups, and Conditional Splits.
+
+4. Loading – Inserts valid data into the main transaction table.
+
+5 .Error Handling – Redirects invalid rows to error tables with file-level tracking.
+
+
+🧰 Tools Used
 
 SSIS (Foreach Loop, Data Flow Task, File System Task, OLE DB Destination)
 
 SQL Server 2019+ (Database: SSIS_Telecom_DB)
 
 Visual Studio (SSDT) for package development
+
+
+🗃️ Database & Tables
+
+Target database: SSIS_Telecom_DB
+
+[dbo].[telecom_transaction] → Valid, clean records ✅
+
+[dbo].[error_transaction] → Invalid rows ❌
+
+[dbo].[error_source_output] → Logs source file names & rejected rows 📄
+
+[dbo].[dim_imsi_reference] → Lookup table for IMSI validation 🔍
+
 
 📁 Structure
 
